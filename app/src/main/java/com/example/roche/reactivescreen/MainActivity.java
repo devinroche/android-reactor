@@ -27,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mServiceConnection);
+        Toast.makeText(MainActivity.this, "Service Un-Binded", Toast.LENGTH_LONG).show();
+    };
+
     public void startService(View view) {
         Intent intent = new Intent(this, WallpaperService.class);
         startService(intent);
