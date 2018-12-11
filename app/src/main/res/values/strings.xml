@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">ReactiveScreen</string>
+    <string name="app_name">Control Me</string>
+    <string name="good_goal_head">Keep up the good work!</string>
+    <string name="good_goal_sub">You\'re making good progress.</string>
+    <string name="bad_goal_head">Falling behind</string>
+    <string name="bad_goal_sub">Don\'t quit now, you can still come back!</string>
+    <string name="done_goal_head">You won the day!</string>
+    <string name="done_goal_sub">Why don\'t you try to double your steps?</string>
 </resources>

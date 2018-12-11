@@ -1,6 +1,7 @@
 package com.example.roche.reactivescreen;
 
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.WallpaperManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,11 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unbindService(mServiceConnection);
-        Toast.makeText(MainActivity.this, "Service Un-Binded", Toast.LENGTH_LONG).show();
+    OnMenuItemClickListener setWallpaperClickListener = new OnMenuItemClickListener() {
+        @SuppressLint("ResourceType")
+        public boolean onMenuItemClick(MenuItem i) {
+            Intent intent = new Intent(MainActivity.this, HistoryActivity.class);
+            // Starts Note Activity
+            startActivityForResult(intent, 1);
+            return true;
+        }
     };
 
     public void startService(View view) {
@@ -49,33 +54,23 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this,
                 WallpaperService.class);
         stopService(intent);
-//        unbindService(new Intent(getBaseContext(), WallpaperService.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(mServiceConnection);
+        Toast.makeText(MainActivity.this, "Service Un-Binded", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu m){
-        m.add("set wallpaper")
+        m.add("HISTORY")
                 .setOnMenuItemClickListener(this.setWallpaperClickListener)
                 .setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
         return super.onCreateOptionsMenu(m);
     }
-
-    OnMenuItemClickListener setWallpaperClickListener = new OnMenuItemClickListener(){
-        @SuppressLint("ResourceType")
-        public boolean onMenuItemClick(MenuItem i){
-            WallpaperManager wpManager = WallpaperManager.getInstance(MainActivity.this);
-
-            try {
-                wpManager.setResource(R.drawable.green);
-                Toast.makeText(MainActivity.this, "set wallpaper", Toast.LENGTH_SHORT).show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return false;
-        }
-    };
 
     private ServiceConnection mServiceConnection = new ServiceConnection() {
 
