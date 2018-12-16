@@ -1,12 +1,13 @@
 package com.example.roche.reactivescreen;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Exercise implements Serializable {
 
-    private int id;
     private String date;
     private int steps;
 
@@ -22,12 +23,8 @@ public class Exercise implements Serializable {
         return formatter.format(d);
     }
 
-    public int getId() {
-        return id;
-    }
-
     public void setId(int id) {
-        this.id = id;
+        int id1 = id;
     }
 
     public String getDate() {
@@ -46,6 +43,7 @@ public class Exercise implements Serializable {
         this.steps = steps;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return this.date + " " + this.steps;

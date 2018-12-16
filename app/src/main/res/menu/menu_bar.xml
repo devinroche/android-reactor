@@ -4,8 +4,14 @@
 
     <item
         android:id="@+id/view_all"
-        android:icon="@android:drawable/ic_menu_add"
+        android:icon="@android:drawable/ic_menu_my_calendar"
         android:title="history"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="settings"
         app:showAsAction="ifRoom" />
 
 </menu>

@@ -4,25 +4,23 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
-public class DBHelper extends SQLiteOpenHelper {
+class DBHelper extends SQLiteOpenHelper {
 
-    static final int DATABASE_VERSION = 1;
-    static final String DATABASE_NAME = "exerciseDatabase";
-    static final String TABLE_EXERCISE = "tableExercise";
-    static final String ID = "_id";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "exerciseDatabase";
+    private static final String TABLE_EXERCISE = "tableExercise";
+    private static final String ID = "_id";
     static final String STEPS = "steps";
     static final String DATE = "date";
     String TAG = "DBHelper";
 
     DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        context.deleteDatabase(DATABASE_NAME); // clears db
+//        context.deleteDatabase(DATABASE_NAME); // clears db
     }
 
     private static Exercise toExercise(Cursor cursor) {
@@ -30,6 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToNext())
             note = new Exercise();
 
+        assert note != null;
         note.setId(cursor.getInt(0));
         note.setSteps(cursor.getInt(1));
         note.setDate(cursor.getString(2));
@@ -42,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sqlCreateTable = "CREATE TABLE " + TABLE_EXERCISE +
                 "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 STEPS + " INTEGER, " +
-                DATE + " STRING)";
+                DATE + " TEXT)";
 
         sqLiteDatabase.execSQL(sqlCreateTable);
     }
@@ -77,13 +76,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return toExercise(cursor);
     }
 
-    public void deleteAllExercises() {
-        // SQL Statement to delete all notes from TABLE_NOTES
-        String deleteAllString = "DELETE from " + TABLE_EXERCISE;
-        getWritableDatabase().execSQL(deleteAllString);
-    }
-
-    public ArrayList<String> getHistory(int id) {
+    private ArrayList<String> getHistory(int id) {
         // SQL Statement to get all ids and titles from TABLE_NOTES
         String sqlSelectTitles = "SELECT " + ID + ", " + DATE + " from " + TABLE_EXERCISE;
         System.out.println(sqlSelectTitles);

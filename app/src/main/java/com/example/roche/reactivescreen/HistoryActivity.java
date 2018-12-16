@@ -1,31 +1,16 @@
 package com.example.roche.reactivescreen;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.ActionMode;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.GridLayout;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class HistoryActivity extends AppCompatActivity {
@@ -35,10 +20,9 @@ public class HistoryActivity extends AppCompatActivity {
     static final String NEW = "new";
     private static final String TAG = "HistoryActivity";
     private static final int NEW_NOTE_CODE = 1;
-    private static final int EDIT_NOTE_CODE = 2;
-    DBHelper dbhelper;
-    SimpleCursorAdapter cursorAdapter;
-    ListView noteListView;
+    private DBHelper dbhelper;
+    private SimpleCursorAdapter cursorAdapter;
+    private ListView noteListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +67,6 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     @Override
-    /**
-     * After completing a note, insert/update data in database,
-     * and update list view
-     */
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
